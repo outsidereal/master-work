@@ -6,7 +6,7 @@ package com.diploma.classdiagram.relationships;
  * Date: 23.09.12
  * Time: 12:53
  */
-public interface ICardinality {
+public interface Cardinality {
     /**
      * Value to describe the infinity value
      */

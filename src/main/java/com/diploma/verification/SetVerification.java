@@ -1,11 +1,10 @@
-package com.diploma.verification.classdiagram;
+package com.diploma.verification;
 
-import com.diploma.classdiagram.*;
 import com.diploma.classdiagram.Class;
-import com.diploma.classdiagram.enumerates.RelationshipsType;
+import com.diploma.classdiagram.enumerates.RelationshipType;
+import com.diploma.classdiagram.relationships.Cardinality;
 import com.diploma.classdiagram.relationships.CardinalityRelationship;
-import com.diploma.classdiagram.relationships.ICardinality;
-import com.diploma.classdiagram.relationships.IRelationship;
+import com.diploma.classdiagram.relationships.Relationship;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -13,26 +12,25 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA.
  * User: d.ulanovych
  * Date: 04.03.13
  * Time: 10:06
  */
 public class SetVerification implements Verification {
     private final Map<String, Class> classes;
-    private final List<IRelationship> relationships;
+    private final List<Relationship> relationships;
 
-    public SetVerification(Map<String, Class> classes, List<IRelationship> relationships) {
+    public SetVerification(Map<String, Class> classes, List<Relationship> relationships) {
         this.classes = classes;
         this.relationships = relationships;
     }
 
     @Override
     public boolean verify() {
-        List<ICardinality> associations = getAssociations();
-        for (ICardinality first : associations) {
-            List<ICardinality> associationsBetweenSameClasses = new ArrayList<ICardinality>();
-            for (ICardinality second : associations) {
+        List<Cardinality> associations = getAssociations();
+        for (Cardinality first : associations) {
+            List<Cardinality> associationsBetweenSameClasses = new ArrayList<Cardinality>();
+            for (Cardinality second : associations) {
                 if (first != second){
                     if (((CardinalityRelationship)second).getSource()
                             .equals(((CardinalityRelationship)first).getSource())
@@ -51,17 +49,17 @@ public class SetVerification implements Verification {
         return true;
     }
 
-    private List<ICardinality> getAssociations() {
-        List<ICardinality> associations = new ArrayList<ICardinality>();
-        for (IRelationship relationship : relationships) {
-            if (relationship.getRelationshipType().equals(RelationshipsType.ASSOCIATION)) {
+    private List<Cardinality> getAssociations() {
+        List<Cardinality> associations = new ArrayList<Cardinality>();
+        for (Relationship relationship : relationships) {
+            if (relationship.getRelationshipType().equals(RelationshipType.ASSOCIATION)) {
                 associations.add((CardinalityRelationship) relationship);
             }
         }
         return associations;
     }
 
-    private boolean compareCardinalityAssociation(List<ICardinality> associations) {
+    private boolean compareCardinalityAssociation(List<Cardinality> associations) {
         if (associations == null || associations.isEmpty())
             throw new InvalidParameterException("Association list can't be empty or null!");
 
@@ -70,8 +68,8 @@ public class SetVerification implements Verification {
         if (associations.size() == 1)
             return true;
 
-        for (ICardinality first : associations) {
-            for (ICardinality second : associations) {
+        for (Cardinality first : associations) {
+            for (Cardinality second : associations) {
                 if (!first.equals(second)) {
                     boolean isOk = compare(first, second);
                     if (!isOk)
@@ -82,7 +80,7 @@ public class SetVerification implements Verification {
         return true;
     }
 
-    private boolean compare(ICardinality first, ICardinality second) {
+    private boolean compare(Cardinality first, Cardinality second) {
         if (first.getSourceMinimum() >= second.getSourceMinimum() &&
                 first.getSourceMaximum() >= second.getSourceMaximum()) {
             //do nothing, everything is ok

@@ -13,7 +13,6 @@ import java.util.List;
  * Time: 21:57
  */
 public class Method extends XMLElement {
-
     private List<MethodParameter> parameters;
     private String returnType;
     private Visibility visibility = Visibility.PUBLIC;

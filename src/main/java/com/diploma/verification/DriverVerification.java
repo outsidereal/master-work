@@ -1,11 +1,11 @@
-package com.diploma.verification.classdiagram;
+package com.diploma.verification;
 
 import com.diploma.classdiagram.Class;
 import com.diploma.classdiagram.Field;
 import com.diploma.classdiagram.Method;
-import com.diploma.classdiagram.enumerates.RelationshipsType;
+import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.enumerates.Visibility;
-import com.diploma.classdiagram.relationships.IRelationship;
+import com.diploma.classdiagram.relationships.Relationship;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,9 +20,9 @@ import java.util.Map;
  */
 public class DriverVerification implements Verification{
     private final Map<String, Class> classes;
-    private final List<IRelationship> relationships;
+    private final List<Relationship> relationships;
 
-    public DriverVerification(Map<String, Class> classes, List<IRelationship> relationships) {
+    public DriverVerification(Map<String, Class> classes, List<Relationship> relationships) {
         this.classes = classes;
         this.relationships = relationships;
     }
@@ -42,8 +42,8 @@ public class DriverVerification implements Verification{
      * @return <b>true</b> if all implementation rules are observed.
      */
     public boolean checkImplementationRules() {
-        for (IRelationship relationship : relationships) {
-            if (relationship.getRelationshipType() == RelationshipsType.IMPLEMENTATION) {
+        for (Relationship relationship : relationships) {
+            if (relationship.getRelationshipType() == RelationshipType.IMPLEMENTATION) {
                 Class source = classes.get(relationship.getSource());
                 Class destination = classes.get(relationship.getDestination());
                 checkImplementation(source, destination);
@@ -106,8 +106,8 @@ public class DriverVerification implements Verification{
      */
     public boolean checkForAbsenceOfMultipleGeneralization() {
         List<Class> dstClasses = new ArrayList<Class>();
-        for (IRelationship relationship : relationships){
-            if (relationship.getRelationshipType() == RelationshipsType.GENERALIZATION) {
+        for (Relationship relationship : relationships){
+            if (relationship.getRelationshipType() == RelationshipType.GENERALIZATION) {
                 dstClasses.add(classes.get(relationship.getDestination()));
             }
         }

@@ -1,9 +1,9 @@
-package com.diploma.verification.classdiagram;
+package com.diploma.verification;
 
 import com.diploma.classdiagram.Class;
-import com.diploma.classdiagram.enumerates.RelationshipsType;
+import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.relationships.CardinalityRelationship;
-import com.diploma.classdiagram.relationships.IRelationship;
+import com.diploma.classdiagram.relationships.Relationship;
 
 import java.util.List;
 import java.util.Map;
@@ -16,17 +16,17 @@ import java.util.Map;
  */
 public class GraphVerification implements Verification {
     private final Map<String, Class> classes;
-    private final List<IRelationship> relationships;
+    private final List<Relationship> relationships;
 
-    public GraphVerification(Map<String, Class> classes, List<IRelationship> relationships) {
+    public GraphVerification(Map<String, Class> classes, List<Relationship> relationships) {
         this.classes = classes;
         this.relationships = relationships;
     }
 
     @Override
     public boolean verify() {
-        for (IRelationship relationship : relationships) {
-            if (relationship.getRelationshipType() == RelationshipsType.ASSOCIATION) {
+        for (Relationship relationship : relationships) {
+            if (relationship.getRelationshipType() == RelationshipType.ASSOCIATION) {
                 final CardinalityRelationship rel = (CardinalityRelationship) relationship;
                 final double cardinality = calculateCardinality(rel);
                 if (cardinality < 1)

@@ -40,10 +40,6 @@ public final class Constants {
     public static final String SRC = "src";
     public static final String DST = "dst";
 
-    public static final String LIFE_LINE = "lifeline";
-    public static final String MESSAGE = "message";
-    public static final String FRAGMENT = "fragment";
-
     public static final String EMPTY_STRING = "";
 
     public static final String TRUE = "true";

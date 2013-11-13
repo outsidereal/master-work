@@ -6,8 +6,7 @@ package com.diploma.global;
  * Date: 18.08.12
  * Time: 17:12
  */
-public abstract class XMLElement implements IElement {
-
+public abstract class XMLElement implements Element {
     private String id;
     private String name;
 

@@ -3,13 +3,11 @@ package com.diploma.classdiagram;
 import com.diploma.classdiagram.enumerates.Visibility;
 
 /**
- * Created with IntelliJ IDEA.
  * User: ZIM
  * Date: 18.08.12
  * Time: 17:33
  */
 public class Field extends MethodParameter {
-
     private Visibility visibility;
     private boolean isFinal = false;
     private boolean isStatic = false;

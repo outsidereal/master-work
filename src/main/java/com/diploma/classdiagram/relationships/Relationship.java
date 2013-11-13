@@ -1,65 +1,79 @@
 package com.diploma.classdiagram.relationships;
 
-import com.diploma.classdiagram.enumerates.RelationshipsType;
-import com.diploma.global.XMLElement;
+import com.diploma.classdiagram.enumerates.RelationshipType;
+import com.diploma.global.Element;
 
 /**
- * Created with IntelliJ IDEA.
  * User: ZIM
  * Date: 25.08.12
- * Time: 17:42
+ * Time: 16:19
  */
-public class Relationship extends XMLElement implements IRelationship {
 
-    private String source;
-    private String destination;
-    private boolean isSingleElement = false;
-    private RelationshipsType relationshipsType;
+public interface Relationship extends Element {
 
+    /**
+     * This method should return identifier
+     * of source (also known as parent or supplier)
+     * element of relationships.
+     * <p/>
+     * For example, if class A generalizing class B
+     * method should return identifier of class B.
+     *
+     * @return - Source (also known as parent or supplier) identifier of relationship.
+     */
+    public String getSource();
 
-    public String getSource() {
-        return source;
-    }
+    /**
+     * @param source - Set the source (also known as parent or supplier) of relationship
+     * @see #setSource(String) for detail information.
+     */
+    public void setSource(String source);
 
-    public void setSource(String source) {
-        this.source = source;
-    }
+    /**
+     * This method should return identifier
+     * of destination (also known as child or client)
+     * element of relationship.
+     * <p/>
+     * For example, if class A generalizing class B
+     * method should return identifier of class A.
+     *
+     * @return - Destination (also known as child or client) identifier of relationship.
+     */
+    public String getDestination();
 
-    public String getDestination() {
-        return destination;
-    }
+    /**
+     * @param destination - Set the destination (also known as child or client) identifier of relationship.
+     * @see #setDestination(String) for detail information.
+     */
+    public void setDestination(String destination);
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
+    /**
+     * This method should return
+     * <b>true</b> if element is single in xml file and
+     * <b>false</b> if element if a part(child) of owner packaged element.
+     */
+    public boolean isSingleElement();
 
-    public boolean isSingleElement() {
-        return isSingleElement;
-    }
+    /**
+     * @param isSingleElement - Set <b>true</b> if it is single and <b>false</b> if not.
+     * @see #isSingleElement() for detail information.
+     */
+    public void setSingleElement(boolean isSingleElement);
 
-    public void setSingleElement(boolean isSingleElement) {
-        this.isSingleElement = isSingleElement;
-    }
+    /**
+     * Method should return relationship type
+     * witch is one of:
+     *
+     * @return - RelationshipImpl type.
+     * @see com.diploma.classdiagram.enumerates.RelationshipType
+     */
+    public RelationshipType getRelationshipType();
 
-    public RelationshipsType getRelationshipType() {
-        return relationshipsType;
-    }
-
-    public void setRelationshipType(RelationshipsType type) {
-        this.relationshipsType = type;
-    }
-
-    @Override
-    public String toString() {
-        String relationshipInfo =
-                "Relationship name : " + getName() + "\n" +
-                        "Relationship type : " + getRelationshipType() + "\n" +
-                        "source : " + getSource() + "\n" +
-                        "destination : " + getDestination() + "\n" +
-                        "isSingle : " + isSingleElement() + "\n" +
-                        "ID : " + getId() + "\n";
-
-        return relationshipInfo;
-    }
+    /**
+     * Method set the relationship type.
+     *
+     * @param type - RelationshipImpl type.
+     */
+    public void setRelationshipType(RelationshipType type);
 
 }

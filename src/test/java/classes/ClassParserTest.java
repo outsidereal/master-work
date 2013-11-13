@@ -1,7 +1,7 @@
 package classes;
 
 import com.diploma.classdiagram.Class;
-import com.diploma.classdiagram.relationships.IRelationship;
+import com.diploma.classdiagram.relationships.Relationship;
 import com.diploma.parser.ClassParser;
 
 import java.util.Iterator;
@@ -27,7 +27,7 @@ public class ClassParserTest {
         cp.parse(filePathRelationship);
 
         Map<String, Class> classes = cp.getParsedClasses();
-        List<IRelationship> relationships = cp.getParsedRelationships();
+        List<Relationship> relationships = cp.getParsedRelationships();
 
         int count = 0;
         for (Iterator iterator = classes.values().iterator(); iterator.hasNext(); ) {
@@ -39,7 +39,7 @@ public class ClassParserTest {
         count = 0;
         for (Iterator iterator = relationships.iterator(); iterator.hasNext(); ) {
             count++;
-            IRelationship rel = (IRelationship) iterator.next();
+            Relationship rel = (Relationship) iterator.next();
 
             System.out.print(count + ". " + rel.toString() + "\n");
         }

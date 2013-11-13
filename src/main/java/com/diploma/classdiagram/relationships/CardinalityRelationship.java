@@ -1,6 +1,6 @@
 package com.diploma.classdiagram.relationships;
 
-import com.diploma.classdiagram.enumerates.RelationshipsType;
+import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.global.XMLElement;
 
 /**
@@ -9,12 +9,12 @@ import com.diploma.global.XMLElement;
  * Date: 23.09.12
  * Time: 13:04
  */
-public class CardinalityRelationship extends XMLElement implements IRelationship, ICardinality {
+public class CardinalityRelationship extends XMLElement implements Relationship, Cardinality {
 
     private String source;
     private String destination;
     private boolean isSingleElement = false;
-    private RelationshipsType relationshipsType;
+    private RelationshipType relationshipType;
 
     private Integer srcMinCardinality;
     private Integer srcMaxCardinality;
@@ -46,12 +46,12 @@ public class CardinalityRelationship extends XMLElement implements IRelationship
         this.isSingleElement = isSingleElement;
     }
 
-    public RelationshipsType getRelationshipType() {
-        return relationshipsType;
+    public RelationshipType getRelationshipType() {
+        return relationshipType;
     }
 
-    public void setRelationshipType(RelationshipsType type) {
-        this.relationshipsType = type;
+    public void setRelationshipType(RelationshipType type) {
+        this.relationshipType = type;
     }
 
     public Integer getSourceMinimum() {
@@ -137,8 +137,8 @@ public class CardinalityRelationship extends XMLElement implements IRelationship
     @Override
     public String toString() {
         String relationshipInfo =
-                "Relationship name : " + getName() + "\n" +
-                        "Relationship type : " + getRelationshipType() + "\n" +
+                "RelationshipImpl name : " + getName() + "\n" +
+                        "RelationshipImpl type : " + getRelationshipType() + "\n" +
                         "source : " + getSource() + "\n" +
                         "destination : " + getDestination() + "\n" +
                         "isSingle : " + isSingleElement() + "\n" +

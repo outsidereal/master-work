@@ -4,17 +4,16 @@ import com.diploma.classdiagram.Class;
 import com.diploma.classdiagram.Field;
 import com.diploma.classdiagram.Method;
 import com.diploma.classdiagram.MethodParameter;
-import com.diploma.classdiagram.enumerates.RelationshipsType;
+import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.enumerates.Visibility;
 import com.diploma.classdiagram.relationships.CardinalityRelationship;
-import com.diploma.classdiagram.relationships.IRelationship;
 import com.diploma.classdiagram.relationships.Relationship;
+import com.diploma.classdiagram.relationships.RelationshipImpl;
 import com.diploma.global.Constants;
-import com.diploma.global.IElement;
+import com.diploma.global.Element;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import java.util.*;
@@ -25,44 +24,42 @@ import java.util.*;
  * Date: 25.08.12
  * Time: 22:45
  */
-public class ClassParser implements IParser {
-
-    private Map<String,Class> classes;
-    private List<IRelationship> relationships;
+public class ClassParser implements Parser {
+    private Map<String, Class> classes;
+    private List<Relationship> relationships;
 
     public ClassParser() {
         classes = new HashMap<String, Class>();
-        relationships = new ArrayList<IRelationship>();
+        relationships = new ArrayList<Relationship>();
     }
 
     public Map<String, Class> getParsedClasses() {
         return classes;
     }
 
-    public List<IRelationship> getParsedRelationships() {
+    public List<Relationship> getParsedRelationships() {
         return relationships;
     }
 
-    public List<IElement> parse(String sourceFile) {
+    public List<Element> parse(String sourceFile) {
 
         Document document = getDocument(sourceFile);
         if (document == null) return null;
 
         // Getting the root element of xml file
-        Element root = document.getRootElement();
+        org.dom4j.Element root = document.getRootElement();
         if (root == null) return null;
 
         // iterate through child elements of root with
         // element name "packagedElement"
-        for (Iterator iterator = root.elementIterator(
-                Constants.PACKAGED_ELEMENT); iterator.hasNext(); ) {
+        for (Iterator iterator = root.elementIterator(Constants.PACKAGED_ELEMENT); iterator.hasNext(); ) {
             // getting current packaged element
-            Element packagedElement = (Element) iterator.next();
+            org.dom4j.Element packagedElement = (org.dom4j.Element) iterator.next();
 
             //getting attribute "type"
             // (it could be also "xmi:type" or something like that)
             Attribute type = packagedElement.attribute(Constants.TYPE);
-            if (type == null) return null;
+            if (null == type) return null;
 
             //getting value of type
             String typeValue = type.getValue();
@@ -70,12 +67,10 @@ public class ClassParser implements IParser {
             //deciding what kind of element it is.
             //there are two kinds :
             //single relationship or class (interface is also class)
-            if (typeValue.equals(Constants.CLASS) ||
-                    typeValue.equals(Constants.INTERFACE)) {
+            if (Constants.CLASS.equals(typeValue) || Constants.INTERFACE.equals(typeValue)) {
                 parseClassElement(packagedElement, classes);
-            } else if (typeValue.equals(Constants.REALIZATION) ||
-                    typeValue.equals(Constants.DEPENDENCY) ||
-                    typeValue.equals(Constants.ASSOCIATION)) {
+            } else if (Constants.REALIZATION.equals(typeValue) || Constants.DEPENDENCY.equals(typeValue) ||
+                    Constants.ASSOCIATION.equals(typeValue)) {
                 parseRelationshipElement(packagedElement, relationships);
             } else {
                 //We are simply skipping this elements
@@ -93,7 +88,7 @@ public class ClassParser implements IParser {
      * @param classes      - Map of classes where result storing.
      * @return The same list of classes with new parsed class element.
      */
-    private Map<String,Class> parseClassElement(Element classElement, Map<String,Class> classes) {
+    private Map<String, Class> parseClassElement(org.dom4j.Element classElement, Map<String, Class> classes) {
         //create new instance of class
         Class newClass = new Class();
 
@@ -140,12 +135,12 @@ public class ClassParser implements IParser {
      * @param fields  - List of fields of current class where result storing.
      * @return The same list of fields with new parsed field.
      */
-    private List<Field> parseClassFields(Element element, List<Field> fields) {
+    private List<Field> parseClassFields(org.dom4j.Element element, List<Field> fields) {
 
         // iterate through class attributes
         for (Iterator iterator = element.elementIterator(Constants.ATTRIBUTE); iterator.hasNext(); ) {
             // getting current attribute element
-            Element attributeElement = (Element) iterator.next();
+            org.dom4j.Element attributeElement = (org.dom4j.Element) iterator.next();
             Field field = new Field();
 
             field.setId(getAttributeValue(attributeElement, Constants.ID));
@@ -157,14 +152,14 @@ public class ClassParser implements IParser {
             field.setType(getAttributeValue(attributeElement, Constants.TYPE));
 
             // check for default value
-            Element defaultValueElement = attributeElement.element(Constants.DEFAULT_VALUE);
+            org.dom4j.Element defaultValueElement = attributeElement.element(Constants.DEFAULT_VALUE);
             if (defaultValueElement != null) {
                 field.setValue(getAttributeValue(defaultValueElement, Constants.VALUE));
             }
 
             // if not user defined data type
             if (field.getType().equals(Constants.EMPTY_STRING)) {
-                Element typeElement = attributeElement.element(Constants.TYPE);
+                org.dom4j.Element typeElement = attributeElement.element(Constants.TYPE);
 
                 if (typeElement != null) {
                     field.setType(getAttributeValue(typeElement, Constants.TYPE_HREF));
@@ -187,12 +182,12 @@ public class ClassParser implements IParser {
      * @param methods - List of methods of current class where result storing.
      * @return The same list of methods with new parsed method.
      */
-    private List<Method> parseClassMethods(Element element, List<Method> methods) {
+    private List<Method> parseClassMethods(org.dom4j.Element element, List<Method> methods) {
 
         // iterate through class methods
         for (Iterator iterator = element.elementIterator(Constants.METHOD); iterator.hasNext(); ) {
             // getting current method element
-            Element methodElement = (Element) iterator.next();
+            org.dom4j.Element methodElement = (org.dom4j.Element) iterator.next();
             Method method = new Method();
 
             method.setId(getAttributeValue(methodElement, Constants.ID));
@@ -207,7 +202,7 @@ public class ClassParser implements IParser {
 
             for (Iterator it = methodElement.elementIterator(Constants.METHOD_PARAMETER); it.hasNext(); ) {
 
-                Element parameterElement = (Element) it.next();
+                org.dom4j.Element parameterElement = (org.dom4j.Element) it.next();
                 MethodParameter methodParameter = new MethodParameter();
 
                 methodParameter.setId(getAttributeValue(parameterElement, Constants.ID));
@@ -218,7 +213,7 @@ public class ClassParser implements IParser {
                 String direction = getAttributeValue(parameterElement, Constants.DIRECTION);
                 boolean isRetVal = !direction.equals(Constants.EMPTY_STRING) && direction.equals(Constants.RETURN);
 
-                Element typeElement = parameterElement.element(Constants.TYPE);
+                org.dom4j.Element typeElement = parameterElement.element(Constants.TYPE);
                 if (typeElement != null) {
                     methodParameter.setType(getAttributeValue(typeElement, Constants.TYPE_HREF));
                 }
@@ -247,12 +242,12 @@ public class ClassParser implements IParser {
      *                            stored current parsed relationship.
      * @return List with parsed relationship.
      */
-    private List<IRelationship> parseRelationshipElement(Element relationshipElement, List<IRelationship> relationships) {
+    private List<Relationship> parseRelationshipElement(org.dom4j.Element relationshipElement, List<Relationship> relationships) {
         //getting name of element
         String typeName = getAttributeValue(relationshipElement, Constants.TYPE);
 
         //deciding what kind of association it is.
-        IRelationship relationship = new Relationship();
+        Relationship relationship = new RelationshipImpl();
         relationship.setSingleElement(true);
         //simple alone (dependency and realization)
         if (typeName.equals(Constants.DEPENDENCY) || typeName.equals(Constants.REALIZATION)) {
@@ -260,7 +255,7 @@ public class ClassParser implements IParser {
             relationship.setId(getAttributeValue(relationshipElement, Constants.ID));
             relationship.setSource(getAttributeValue(relationshipElement, Constants.SUPPLIER));
             relationship.setDestination(getAttributeValue(relationshipElement, Constants.CLIENT));
-            relationship.setRelationshipType(typeName.equals(Constants.DEPENDENCY) ? RelationshipsType.DEPENDENCY : RelationshipsType.IMPLEMENTATION);
+            relationship.setRelationshipType(typeName.equals(Constants.DEPENDENCY) ? RelationshipType.DEPENDENCY : RelationshipType.IMPLEMENTATION);
         }
         //structured alone relationship (composition, aggregation and association)
         else {
@@ -278,11 +273,11 @@ public class ClassParser implements IParser {
      * "packagedElement" for relationship and have 3-level structure.
      *
      * @param relationshipElement - DOM element to parse.
-     * @return Parsed IRelationship element.
+     * @return Parsed Relationship element.
      *         It could be Aggregation, Composition or Association.
      */
-    private IRelationship parseSingleRelationship(Element relationshipElement) {
-        IRelationship relationship = new CardinalityRelationship();
+    private Relationship parseSingleRelationship(org.dom4j.Element relationshipElement) {
+        Relationship relationship = new CardinalityRelationship();
 
         // set the name and identifier of element
         relationship.setName(getAttributeValue(relationshipElement, Constants.NAME));
@@ -292,13 +287,13 @@ public class ClassParser implements IParser {
         // get the source and destination describe elements
         for (Iterator iterator = relationshipElement.elementIterator(Constants.OWNED_END); iterator.hasNext(); ) {
             // getting current owned element
-            Element element = (Element) iterator.next();
+            org.dom4j.Element element = (org.dom4j.Element) iterator.next();
             if (getAttributeValue(element, Constants.NAME).equals(Constants.SRC)) {
                 //set the identifier of source class
                 relationship.setSource(getAttributeValue(element, Constants.TYPE));
 
-                Element upperValue = element.element(Constants.UPPER_VALUE);
-                Element lowerValue = element.element(Constants.LOWER_VALUE);
+                org.dom4j.Element upperValue = element.element(Constants.UPPER_VALUE);
+                org.dom4j.Element lowerValue = element.element(Constants.LOWER_VALUE);
 
                 ((CardinalityRelationship) relationship).setSourceMinimum(getAttributeValue(lowerValue, Constants.VALUE));
                 ((CardinalityRelationship) relationship).setSourceMaximum(getAttributeValue(upperValue, Constants.VALUE));
@@ -306,8 +301,8 @@ public class ClassParser implements IParser {
                 //set the identifier of destination class
                 relationship.setDestination(getAttributeValue(element, Constants.TYPE));
 
-                Element upperValue = element.element(Constants.UPPER_VALUE);
-                Element lowerValue = element.element(Constants.LOWER_VALUE);
+                org.dom4j.Element upperValue = element.element(Constants.UPPER_VALUE);
+                org.dom4j.Element lowerValue = element.element(Constants.LOWER_VALUE);
 
                 ((CardinalityRelationship) relationship).setDestinationMinimum(getAttributeValue(lowerValue, Constants.VALUE));
                 ((CardinalityRelationship) relationship).setDestinationMaximum(getAttributeValue(upperValue, Constants.VALUE));
@@ -316,11 +311,11 @@ public class ClassParser implements IParser {
                 Attribute attribute = element.attribute(Constants.AGGREGATION_TYPE);
 
                 if (attribute == null) {
-                    relationship.setRelationshipType(RelationshipsType.ASSOCIATION);
+                    relationship.setRelationshipType(RelationshipType.ASSOCIATION);
                 } else if (attribute.getValue().equals(Constants.AGGREGATION)) {
-                    relationship.setRelationshipType(RelationshipsType.AGGREGATION);
+                    relationship.setRelationshipType(RelationshipType.AGGREGATION);
                 } else {
-                    relationship.setRelationshipType(RelationshipsType.COMPOSITION);
+                    relationship.setRelationshipType(RelationshipType.COMPOSITION);
                 }
             }
         }
@@ -334,18 +329,18 @@ public class ClassParser implements IParser {
      * @param classElement - Current class element.
      * @return List of realizations.
      */
-    private List<IRelationship> parseRealizations(Element classElement) {
-        List<IRelationship> generalizations = new ArrayList<IRelationship>();
+    private List<Relationship> parseRealizations(org.dom4j.Element classElement) {
+        List<Relationship> generalizations = new ArrayList<Relationship>();
 
         for (Iterator iterator = classElement.elementIterator(Constants.GENERALIZATION); iterator.hasNext(); ) {
-            Element generalization = (Element) iterator.next();
+            org.dom4j.Element generalization = (org.dom4j.Element) iterator.next();
 
-            IRelationship relationship = new Relationship();
+            Relationship relationship = new RelationshipImpl();
 
             relationship.setId(getAttributeValue(generalization, Constants.ID));
             relationship.setName(getAttributeValue(generalization, Constants.NAME));
             relationship.setSingleElement(false);
-            relationship.setRelationshipType(RelationshipsType.GENERALIZATION);
+            relationship.setRelationshipType(RelationshipType.GENERALIZATION);
             relationship.setSource(getAttributeValue(generalization, Constants.GENERAL));
             relationship.setDestination(getAttributeValue(generalization.getParent(), Constants.ID));
 
@@ -365,7 +360,7 @@ public class ClassParser implements IParser {
      * @param attributeName - Name of attribute
      * @return Value of current element
      */
-    private String getAttributeValue(Element element, String attributeName) {
+    private String getAttributeValue(org.dom4j.Element element, String attributeName) {
         if (element == null) throw new NullPointerException();
 
         Attribute attribute = element.attribute(attributeName);
@@ -390,7 +385,7 @@ public class ClassParser implements IParser {
      * @param attributeName - Name of attribute
      * @return true or false
      */
-    private boolean getBooleanAttributeValue(Element element, String attributeName) {
+    private boolean getBooleanAttributeValue(org.dom4j.Element element, String attributeName) {
         if (element == null) throw new NullPointerException();
 
         Attribute attribute = element.attribute(attributeName);
@@ -415,7 +410,7 @@ public class ClassParser implements IParser {
      * @return Visibility type
      * @see Visibility
      */
-    private Visibility getVisibility(Element element) {
+    private Visibility getVisibility(org.dom4j.Element element) {
         Visibility visibility = Visibility.PUBLIC;
 
         String visibilityValue = getAttributeValue(element, Constants.VISIBILITY);

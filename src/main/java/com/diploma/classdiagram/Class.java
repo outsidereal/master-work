@@ -13,9 +13,7 @@ import java.util.List;
  * Time: 17:29
  */
 public class Class extends XMLElement {
-
     private Visibility visibility;
-
     private boolean isFinal = false;
     private boolean isStatic = false;
     private boolean isAbstract = false;

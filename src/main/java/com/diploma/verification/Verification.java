@@ -1,7 +1,6 @@
-package com.diploma.verification.classdiagram;
+package com.diploma.verification;
 
 /**
- * Created with IntelliJ IDEA.
  * User: ZIM
  * Date: 26.01.13
  * Time: 15:26

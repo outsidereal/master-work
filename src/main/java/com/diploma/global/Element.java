@@ -6,7 +6,7 @@ package com.diploma.global;
  * Date: 18.08.12
  * Time: 16:54
  */
-public interface IElement {
+public interface Element {
 
     /**
      * @param id - Unique identifier of element.

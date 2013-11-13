@@ -6,7 +6,7 @@ package com.diploma.classdiagram.enumerates;
  * Date: 19.08.12
  * Time: 21:26
  */
-public enum RelationshipsType {
+public enum RelationshipType {
     // Наследование
     GENERALIZATION,
     // Реализация интерфейса

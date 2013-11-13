@@ -3,13 +3,11 @@ package com.diploma.classdiagram;
 import com.diploma.global.XMLElement;
 
 /**
- * Created with IntelliJ IDEA.
  * User: ZIM
  * Date: 18.08.12
  * Time: 21:55
  */
 public class MethodParameter extends XMLElement {
-
     private String type;
     private String value;
 

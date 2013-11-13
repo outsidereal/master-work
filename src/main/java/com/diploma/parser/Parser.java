@@ -1,17 +1,15 @@
 package com.diploma.parser;
 
-import com.diploma.global.IElement;
+import com.diploma.global.Element;
 
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
  * User: ZIM
  * Date: 25.08.12
  * Time: 21:30
- * To change this template use File | Settings | File Templates.
  */
-public interface IParser {
+public interface Parser {
 
     /**
      * This method should parse well-formed XML file
@@ -20,5 +18,5 @@ public interface IParser {
      * @param sourceFile - The XML file path.
      * @return - List of XML elements.
      */
-    public List<IElement> parse(String sourceFile);
+    public List<Element> parse(String sourceFile);
 }

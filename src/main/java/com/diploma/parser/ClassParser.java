@@ -26,29 +26,33 @@ import java.util.*;
  */
 public class ClassParser implements Parser {
     private Map<String, Class> classes;
-    private List<Relationship> relationships;
+    private Map<String, Relationship> relationships;
 
     public ClassParser() {
         classes = new HashMap<String, Class>();
-        relationships = new ArrayList<Relationship>();
+        relationships = new HashMap<String, Relationship>();
     }
 
     public Map<String, Class> getParsedClasses() {
         return classes;
     }
 
-    public List<Relationship> getParsedRelationships() {
+    public Map<String, Relationship> getParsedRelationships() {
         return relationships;
     }
 
-    public List<Element> parse(String sourceFile) {
+    public List<Element> parse(String sourceFile) throws UMLParserException {
 
         Document document = getDocument(sourceFile);
-        if (document == null) return null;
+        if (null == document) {
+            throw new UMLParserException("Invalid source file path!");
+        }
 
         // Getting the root element of xml file
         org.dom4j.Element root = document.getRootElement();
-        if (root == null) return null;
+        if (null == root) {
+            throw new UMLParserException("Unable to find root element!");
+        }
 
         // iterate through child elements of root with
         // element name "packagedElement"
@@ -59,7 +63,9 @@ public class ClassParser implements Parser {
             //getting attribute "type"
             // (it could be also "xmi:type" or something like that)
             Attribute type = packagedElement.attribute(Constants.TYPE);
-            if (null == type) return null;
+            if (null == type) {
+                throw new UMLParserException("Can't determine type of packaged element " + packagedElement.getName());
+            }
 
             //getting value of type
             String typeValue = type.getValue();
@@ -69,8 +75,7 @@ public class ClassParser implements Parser {
             //single relationship or class (interface is also class)
             if (Constants.CLASS.equals(typeValue) || Constants.INTERFACE.equals(typeValue)) {
                 parseClassElement(packagedElement, classes);
-            } else if (Constants.REALIZATION.equals(typeValue) || Constants.DEPENDENCY.equals(typeValue) ||
-                    Constants.ASSOCIATION.equals(typeValue)) {
+            } else if (Constants.REALIZATION.equals(typeValue) || Constants.DEPENDENCY.equals(typeValue) || Constants.ASSOCIATION.equals(typeValue)) {
                 parseRelationshipElement(packagedElement, relationships);
             } else {
                 //We are simply skipping this elements
@@ -242,7 +247,7 @@ public class ClassParser implements Parser {
      *                            stored current parsed relationship.
      * @return List with parsed relationship.
      */
-    private List<Relationship> parseRelationshipElement(org.dom4j.Element relationshipElement, List<Relationship> relationships) {
+    private Map<String, Relationship> parseRelationshipElement(org.dom4j.Element relationshipElement, Map<String, Relationship> relationships) {
         //getting name of element
         String typeName = getAttributeValue(relationshipElement, Constants.TYPE);
 
@@ -263,7 +268,7 @@ public class ClassParser implements Parser {
         }
 
         // add parsed relationship to list
-        relationships.add(relationship);
+        relationships.put(relationship.getId(), relationship);
 
         return relationships;
     }
@@ -329,8 +334,8 @@ public class ClassParser implements Parser {
      * @param classElement - Current class element.
      * @return List of realizations.
      */
-    private List<Relationship> parseRealizations(org.dom4j.Element classElement) {
-        List<Relationship> generalizations = new ArrayList<Relationship>();
+    private Map<String, Relationship> parseRealizations(org.dom4j.Element classElement) {
+        Map<String, Relationship> generalizations = new HashMap<String, Relationship>();
 
         for (Iterator iterator = classElement.elementIterator(Constants.GENERALIZATION); iterator.hasNext(); ) {
             org.dom4j.Element generalization = (org.dom4j.Element) iterator.next();
@@ -344,10 +349,10 @@ public class ClassParser implements Parser {
             relationship.setSource(getAttributeValue(generalization, Constants.GENERAL));
             relationship.setDestination(getAttributeValue(generalization.getParent(), Constants.ID));
 
-            generalizations.add(relationship);
+            generalizations.put(relationship.getId(), relationship);
         }
 
-        relationships.addAll(generalizations);
+        relationships.putAll(generalizations);
 
         return generalizations;
     }
@@ -365,13 +370,13 @@ public class ClassParser implements Parser {
 
         Attribute attribute = element.attribute(attributeName);
 
-        if (attribute == null) {
+        if (null == attribute) {
             return Constants.EMPTY_STRING;
         }
 
         String value = attribute.getValue();
 
-        if (value == null) {
+        if (null == value) {
             return Constants.EMPTY_STRING;
         }
 

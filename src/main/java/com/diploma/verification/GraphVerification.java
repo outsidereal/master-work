@@ -5,6 +5,7 @@ import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.relationships.CardinalityRelationship;
 import com.diploma.classdiagram.relationships.Relationship;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,30 +16,37 @@ import java.util.Map;
  * Time: 15:10
  */
 public class GraphVerification implements Verification {
-    private final Map<String, Class> classes;
-    private final List<Relationship> relationships;
+    private final Map<String, Relationship> relationships;
 
-    public GraphVerification(Map<String, Class> classes, List<Relationship> relationships) {
-        this.classes = classes;
+    public GraphVerification(Map<String, Relationship> relationships) {
         this.relationships = relationships;
     }
 
     @Override
     public boolean verify() {
-        for (Relationship relationship : relationships) {
-            if (relationship.getRelationshipType() == RelationshipType.ASSOCIATION) {
+        Iterator iterator = relationships.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry pair = (Map.Entry) iterator.next();
+            Relationship relationship = (Relationship) pair.getValue();
+            if (RelationshipType.ASSOCIATION.equals(relationship.getRelationshipType())) {
                 final CardinalityRelationship rel = (CardinalityRelationship) relationship;
-                final double cardinality = calculateCardinality(rel);
-                if (cardinality < 1)
+                final Double cardinality = calculateCardinality(rel);
+                if (cardinality < 1) {
                     return false;
+                }
             }
         }
+
         return true;
     }
 
-    private double calculateCardinality(final CardinalityRelationship relationship) {
-        double cardinality = relationship.getDestinationMaximum() / (1 / relationship.getSourceMinimum()) *
-                relationship.getSourceMaximum() * (1 / relationship.getDestinationMinimum());
+    private Double calculateCardinality(final CardinalityRelationship relationship) {
+        Double sourceMinimum = Double.valueOf(relationship.getSourceMinimum());
+        Double sourceMaximum = Double.valueOf(relationship.getSourceMaximum());
+        Double destinationMinimum = Double.valueOf(relationship.getDestinationMinimum());
+        Double destinationMaximum = Double.valueOf(relationship.getDestinationMaximum());
+        Double cardinality = destinationMaximum / (1.0d / sourceMinimum) *
+                sourceMaximum * (1.0d / destinationMinimum);
         return cardinality;
     }
 }

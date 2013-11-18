@@ -16,7 +16,7 @@ import java.util.Map;
  * User: d.ulanovych
  * Date: 11/16/13
  */
-public class ClassParserTest extends TestCase {
+public class TestClassParser extends TestCase {
     private static final String filePathRelationship = "./src/test/resources/diagrams/class/test_dep.uml";
     private static final String filePathClass = "./src/test/resources/diagrams/class/class_tester.uml";
 

@@ -7,10 +7,7 @@ import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.enumerates.Visibility;
 import com.diploma.classdiagram.relationships.Relationship;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -79,7 +76,7 @@ public class DriverVerification implements Verification {
                     }
                 }
                 for (Field field : fields) {
-                    if (!(field.getVisibility() == Visibility.PUBLIC || field.getVisibility() == Visibility.PACKAGE)) {
+                    if (!(Visibility.PUBLIC.equals(field.getVisibility()) || Visibility.PACKAGE.equals(field.getVisibility()))) {
                         LOGGER.error(DriverVerification.class.getName() + " Invalid accessor of field " + field.getName() +
                                 " in interface " + clazz.getName() + " . It must be PUBLIC only!");
                         isValid = false;
@@ -123,21 +120,21 @@ public class DriverVerification implements Verification {
      * @return <b>true</b> if generalization rules are followed.
      */
     public boolean checkForAbsenceOfMultipleGeneralization() {
-        List<Class> dstClasses = new ArrayList<Class>();
+        boolean isValid = true;
+        Set<Class> destinationClasses = new HashSet<Class>();
         for (Relationship relationship : relationships.values()) {
-            if (relationship.getRelationshipType() == RelationshipType.GENERALIZATION) {
-                dstClasses.add(classes.get(relationship.getDestination()));
+            if (RelationshipType.GENERALIZATION.equals(relationship.getRelationshipType())) {
+                Class currentClass = classes.get(relationship.getDestination());
+                if (destinationClasses.contains(currentClass)) {
+                    LOGGER.error(DriverVerification.class.getName() + " Invalid inheritance at " + currentClass.getName() +
+                            " class. Each class can extends only one super-class!");
+                    isValid = false;
+                }
+                destinationClasses.add(currentClass);
             }
         }
 
-        //TODO incorrect comparsion
-        for (Class dstClass1 : dstClasses) {
-            for (Class dstClass2 : dstClasses)
-                if (dstClass1.getId().equals(dstClass2.getId()))
-                    return false;
-        }
-
-        return true;
+        return isValid;
     }
 
     /**

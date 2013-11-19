@@ -17,6 +17,7 @@ public class TestDriverVerification extends TestCase {
         ClassParser parser = new ClassParser();
         parser.parse(FAILED_GENERALIZATION);
         Verification verification = new DriverVerification(parser.getParsedClasses(), parser.getParsedRelationships());
+        assertFalse(verification.verify());
     }
 
 

@@ -16,14 +16,14 @@ public class TestGraphVerification extends TestCase{
     public void testGraphVerificationWhenFailed() throws UMLParserException {
         Parser parser = new ClassParser();
         parser.parse(FAILED_GRAPH_DIAGRAM);
-        GraphVerification verification = new GraphVerification(((ClassParser)parser).getParsedRelationships());
+        Verification verification = new GraphVerification(((ClassParser)parser).getParsedRelationships());
         assertFalse(verification.verify());
     }
 
     public void testGraphVerificationWhenTrue() throws UMLParserException {
         Parser parser = new ClassParser();
         parser.parse(WORKING_GRAPH_DIAGRAM);
-        GraphVerification verification = new GraphVerification(((ClassParser)parser).getParsedRelationships());
+        Verification verification = new GraphVerification(((ClassParser)parser).getParsedRelationships());
         assertTrue(verification.verify());
     }
 }

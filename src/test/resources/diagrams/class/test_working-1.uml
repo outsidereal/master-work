@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_h_SsUExfEeOWlIqM0Ybb1g" name="test_working-1">
+  <elementImport xmi:id="_iB0b4ExfEeOWlIqM0Ybb1g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_iB-M4ExfEeOWlIqM0Ybb1g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_iB-M4UxfEeOWlIqM0Ybb1g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_iB-M4kxfEeOWlIqM0Ybb1g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_IzKloExgEeOWlIqM0Ybb1g" name="Class A">
+    <ownedAttribute xmi:id="_wYXOMExgEeOWlIqM0Ybb1g" name="prop1" visibility="private" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_5KSW0ExgEeOWlIqM0Ybb1g" name="getProperty1">
+      <ownedParameter xmi:id="_bFOyUExhEeOWlIqM0Ybb1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_b19rsExhEeOWlIqM0Ybb1g" name="setProperty">
+      <ownedParameter xmi:id="_0rKqsExhEeOWlIqM0Ybb1g" name="value">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KULFYExgEeOWlIqM0Ybb1g" name="Class B">
+    <ownedAttribute xmi:id="_9yGaAExhEeOWlIqM0Ybb1g" name="name" visibility="private" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_AV3XQExiEeOWlIqM0Ybb1g" name="getName">
+      <ownedParameter xmi:id="_CEus0ExiEeOWlIqM0Ybb1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_LAyo4ExiEeOWlIqM0Ybb1g" name="setName">
+      <ownedParameter xmi:id="_Nu1jgExiEeOWlIqM0Ybb1g" direction="return"/>
+      <ownedParameter xmi:id="_Nu1jgUxiEeOWlIqM0Ybb1g" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_fGZXIExgEeOWlIqM0Ybb1g" memberEnd="_fGZXIUxgEeOWlIqM0Ybb1g _fGZXJExgEeOWlIqM0Ybb1g">
+    <ownedEnd xmi:id="_fGZXIUxgEeOWlIqM0Ybb1g" name="src" type="_IzKloExgEeOWlIqM0Ybb1g" association="_fGZXIExgEeOWlIqM0Ybb1g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fGZXI0xgEeOWlIqM0Ybb1g" value="5"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fGZXIkxgEeOWlIqM0Ybb1g" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_fGZXJExgEeOWlIqM0Ybb1g" name="dst" type="_KULFYExgEeOWlIqM0Ybb1g" association="_fGZXIExgEeOWlIqM0Ybb1g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_fGZXJkxgEeOWlIqM0Ybb1g" value="4"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_fGZXJUxgEeOWlIqM0Ybb1g" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Package>

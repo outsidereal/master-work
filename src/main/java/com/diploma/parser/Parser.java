@@ -18,5 +18,5 @@ public interface Parser {
      * @param sourceFile - The XML file path.
      * @return - List of XML elements.
      */
-    public List<Element> parse(String sourceFile);
+    public List<Element> parse(String sourceFile) throws UMLParserException;
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_BWt60ExjEeOWlIqM0Ybb1g" name="test_failed-2">
+  <elementImport xmi:id="_BX6NoExjEeOWlIqM0Ybb1g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_BX6NoUxjEeOWlIqM0Ybb1g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_BX6NokxjEeOWlIqM0Ybb1g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_BX6No0xjEeOWlIqM0Ybb1g">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_IIyrkExjEeOWlIqM0Ybb1g" name="Parent 1">
+    <ownedAttribute xmi:id="_rhMuIExkEeOWlIqM0Ybb1g" name="property1" visibility="private" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_8QmDoExkEeOWlIqM0Ybb1g" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_t0bVAExkEeOWlIqM0Ybb1g" name="property2" visibility="protected" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_wNKG8ExkEeOWlIqM0Ybb1g" name="property3" aggregation="composite">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_yevvEExkEeOWlIqM0Ybb1g" name="getProp1">
+      <ownedParameter xmi:id="_7KjooExkEeOWlIqM0Ybb1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_C_Y24ExlEeOWlIqM0Ybb1g" name="getProperty2">
+      <ownedParameter xmi:id="_GyIIsExlEeOWlIqM0Ybb1g" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_R9OvMExlEeOWlIqM0Ybb1g" name="setProperty3">
+      <ownedParameter xmi:id="_WRW20ExlEeOWlIqM0Ybb1g" direction="return"/>
+      <ownedParameter xmi:id="_WRW20UxlEeOWlIqM0Ybb1g" name="value">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_JPRLcExjEeOWlIqM0Ybb1g" name="Parent 2">
+    <ownedAttribute xmi:id="_ZesVgExlEeOWlIqM0Ybb1g" name="property1" aggregation="composite"/>
+    <ownedOperation xmi:id="_fyEYEExlEeOWlIqM0Ybb1g" name="getProperty1">
+      <ownedParameter xmi:id="_hOvxcExlEeOWlIqM0Ybb1g" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_asmIgExkEeOWlIqM0Ybb1g" name="Child">
+    <generalization xmi:id="_OpOLUExmEeOWlIqM0Ybb1g" general="_JPRLcExjEeOWlIqM0Ybb1g"/>
+    <generalization xmi:id="_Rdhe8ExmEeOWlIqM0Ybb1g" general="_IIyrkExjEeOWlIqM0Ybb1g"/>
+    <ownedOperation xmi:id="_TriOoExmEeOWlIqM0Ybb1g" name="parse">
+      <ownedParameter xmi:id="_V6SlMExmEeOWlIqM0Ybb1g" direction="return"/>
+      <ownedParameter xmi:id="_V6SlMUxmEeOWlIqM0Ybb1g" name="path">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+</uml:Package>

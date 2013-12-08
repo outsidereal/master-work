@@ -45,8 +45,7 @@ public class GraphVerification implements Verification {
         Double sourceMaximum = Double.valueOf(relationship.getSourceMaximum());
         Double destinationMinimum = Double.valueOf(relationship.getDestinationMinimum());
         Double destinationMaximum = Double.valueOf(relationship.getDestinationMaximum());
-        Double cardinality = destinationMaximum / (1.0d / sourceMinimum) *
-                sourceMaximum * (1.0d / destinationMinimum);
+        Double cardinality = destinationMaximum / (1.0d / sourceMinimum) * sourceMaximum * (1.0d / destinationMinimum);
         return cardinality;
     }
 }

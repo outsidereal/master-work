@@ -19,6 +19,4 @@ public class TestDriverVerification extends TestCase {
         Verification verification = new DriverVerification(parser.getParsedClasses(), parser.getParsedRelationships());
         assertFalse(verification.verify());
     }
-
-
 }

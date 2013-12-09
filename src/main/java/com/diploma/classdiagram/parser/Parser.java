@@ -1,6 +1,6 @@
-package com.diploma.parser;
+package com.diploma.classdiagram.parser;
 
-import com.diploma.global.Element;
+import com.diploma.classdiagram.model.XMLElement;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface Parser {
      * @param sourceFile - The XML file path.
      * @return - List of XML elements.
      */
-    public List<Element> parse(String sourceFile) throws UMLParserException;
+    public List<XMLElement> parse(String sourceFile) throws UMLParserException;
 }

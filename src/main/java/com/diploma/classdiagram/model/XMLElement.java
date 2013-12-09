@@ -1,4 +1,4 @@
-package com.diploma.global;
+package com.diploma.classdiagram.model;
 
 /**
  * Created with IntelliJ IDEA.
@@ -6,7 +6,7 @@ package com.diploma.global;
  * Date: 18.08.12
  * Time: 16:54
  */
-public interface Element {
+public interface XMLElement {
 
     /**
      * @param id - Unique identifier of element.

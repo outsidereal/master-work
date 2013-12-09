@@ -1,13 +1,12 @@
-package com.diploma.parser;
+package com.diploma.classdiagram.parser;
 
-import com.diploma.classdiagram.Class;
+import com.diploma.classdiagram.model.Class;
 import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.enumerates.Visibility;
-import com.diploma.classdiagram.relationships.Cardinality;
-import com.diploma.classdiagram.relationships.CardinalityRelationship;
-import com.diploma.classdiagram.relationships.Relationship;
+import com.diploma.classdiagram.model.relationships.Cardinality;
+import com.diploma.classdiagram.model.relationships.CardinalityRelationship;
+import com.diploma.classdiagram.model.relationships.Relationship;
 import junit.framework.TestCase;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Map;

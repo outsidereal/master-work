@@ -1,4 +1,4 @@
-package com.diploma.verification;
+package com.diploma.classdiagram.verification;
 
 /**
  * User: d.ulanovych

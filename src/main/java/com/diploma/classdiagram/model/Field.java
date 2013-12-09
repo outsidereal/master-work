@@ -1,4 +1,4 @@
-package com.diploma.classdiagram;
+package com.diploma.classdiagram.model;
 
 import com.diploma.classdiagram.enumerates.Visibility;
 

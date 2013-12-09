@@ -1,4 +1,4 @@
-package com.diploma.parser;
+package com.diploma.classdiagram.parser;
 
 /**
  * User: d.ulanovych

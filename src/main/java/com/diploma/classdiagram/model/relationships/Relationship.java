@@ -1,7 +1,7 @@
-package com.diploma.classdiagram.relationships;
+package com.diploma.classdiagram.model.relationships;
 
 import com.diploma.classdiagram.enumerates.RelationshipType;
-import com.diploma.global.Element;
+import com.diploma.classdiagram.model.XMLElement;
 
 /**
  * User: ZIM
@@ -9,7 +9,7 @@ import com.diploma.global.Element;
  * Time: 16:19
  */
 
-public interface Relationship extends Element {
+public interface Relationship extends XMLElement {
 
     /**
      * This method should return identifier

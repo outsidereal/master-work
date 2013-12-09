@@ -1,4 +1,4 @@
-package com.diploma.verification;
+package com.diploma.classdiagram.verification;
 
 import org.apache.log4j.Logger;
 

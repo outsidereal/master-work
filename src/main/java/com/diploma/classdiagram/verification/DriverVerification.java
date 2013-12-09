@@ -1,11 +1,11 @@
-package com.diploma.verification;
+package com.diploma.classdiagram.verification;
 
-import com.diploma.classdiagram.Class;
-import com.diploma.classdiagram.Field;
-import com.diploma.classdiagram.Method;
+import com.diploma.classdiagram.model.Class;
+import com.diploma.classdiagram.model.Field;
+import com.diploma.classdiagram.model.Method;
 import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.enumerates.Visibility;
-import com.diploma.classdiagram.relationships.Relationship;
+import com.diploma.classdiagram.model.relationships.Relationship;
 
 import java.util.*;
 

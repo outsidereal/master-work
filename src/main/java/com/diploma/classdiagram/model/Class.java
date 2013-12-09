@@ -1,7 +1,6 @@
-package com.diploma.classdiagram;
+package com.diploma.classdiagram.model;
 
 import com.diploma.classdiagram.enumerates.Visibility;
-import com.diploma.global.XMLElement;
 
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +11,9 @@ import java.util.List;
  * Date: 18.08.12
  * Time: 17:29
  */
-public class Class extends XMLElement {
+public class Class implements XMLElement {
+    private String id;
+    private String name;
     private Visibility visibility;
     private boolean isFinal = false;
     private boolean isStatic = false;
@@ -28,6 +29,22 @@ public class Class extends XMLElement {
 
     public Class(String className) {
         this.setName(className);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isInterface() {

@@ -1,4 +1,4 @@
-package com.diploma.classdiagram.relationships;
+package com.diploma.classdiagram.model.relationships;
 
 /**
  * Created with IntelliJ IDEA.

@@ -1,7 +1,7 @@
-package com.diploma.classdiagram.relationships;
+package com.diploma.classdiagram.model.relationships;
 
 import com.diploma.classdiagram.enumerates.RelationshipType;
-import com.diploma.global.XMLElement;
+import com.diploma.classdiagram.model.XMLElement;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,12 +9,29 @@ import com.diploma.global.XMLElement;
  * Date: 25.08.12
  * Time: 17:42
  */
-public class RelationshipImpl extends XMLElement implements Relationship {
+public class RelationshipImpl implements XMLElement, Relationship {
+    private String id;
+    private String name;
     private String source;
     private String destination;
     private boolean isSingleElement = false;
     private RelationshipType relationshipType;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getSource() {
         return source;

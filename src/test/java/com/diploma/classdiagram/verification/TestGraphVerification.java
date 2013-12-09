@@ -1,8 +1,8 @@
-package com.diploma.verification;
+package com.diploma.classdiagram.verification;
 
-import com.diploma.parser.ClassParser;
-import com.diploma.parser.Parser;
-import com.diploma.parser.UMLParserException;
+import com.diploma.classdiagram.parser.ClassParser;
+import com.diploma.classdiagram.parser.Parser;
+import com.diploma.classdiagram.parser.UMLParserException;
 import junit.framework.TestCase;
 
 /**

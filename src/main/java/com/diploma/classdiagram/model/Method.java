@@ -1,7 +1,6 @@
-package com.diploma.classdiagram;
+package com.diploma.classdiagram.model;
 
 import com.diploma.classdiagram.enumerates.Visibility;
-import com.diploma.global.XMLElement;
 
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +11,9 @@ import java.util.List;
  * Date: 18.08.12
  * Time: 21:57
  */
-public class Method extends XMLElement {
+public class Method implements XMLElement {
+    private String id;
+    private String name;
     private List<MethodParameter> parameters;
     private String returnType;
     private Visibility visibility = Visibility.PUBLIC;
@@ -27,6 +28,22 @@ public class Method extends XMLElement {
 
     public void setParameters(List<MethodParameter> parameters) {
         this.parameters = parameters;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**

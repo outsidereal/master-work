@@ -1,4 +1,4 @@
-package com.diploma.gui;
+package com.diploma.classdiagram.gui;
 
 import javax.swing.*;
 

@@ -1,15 +1,31 @@
-package com.diploma.classdiagram;
-
-import com.diploma.global.XMLElement;
+package com.diploma.classdiagram.model;
 
 /**
  * User: ZIM
  * Date: 18.08.12
  * Time: 21:55
  */
-public class MethodParameter extends XMLElement {
+public class MethodParameter implements XMLElement {
+    private String id;
+    private String name;
     private String type;
     private String value;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * @return - Data type of parameter.

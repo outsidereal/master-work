@@ -1,10 +1,10 @@
-package com.diploma.verification;
+package com.diploma.classdiagram.verification;
 
-import com.diploma.classdiagram.Class;
+import com.diploma.classdiagram.model.Class;
 import com.diploma.classdiagram.enumerates.RelationshipType;
-import com.diploma.classdiagram.relationships.Cardinality;
-import com.diploma.classdiagram.relationships.CardinalityRelationship;
-import com.diploma.classdiagram.relationships.Relationship;
+import com.diploma.classdiagram.model.relationships.Cardinality;
+import com.diploma.classdiagram.model.relationships.CardinalityRelationship;
+import com.diploma.classdiagram.model.relationships.Relationship;
 
 import java.util.ArrayList;
 import java.util.List;

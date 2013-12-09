@@ -1,4 +1,4 @@
-package com.diploma.global;
+package com.diploma.classdiagram;
 
 /**
  * Created with IntelliJ IDEA.

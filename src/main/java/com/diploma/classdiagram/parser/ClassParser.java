@@ -1,16 +1,14 @@
-package com.diploma.parser;
+package com.diploma.classdiagram.parser;
 
-import com.diploma.classdiagram.Class;
-import com.diploma.classdiagram.Field;
-import com.diploma.classdiagram.Method;
-import com.diploma.classdiagram.MethodParameter;
+import com.diploma.classdiagram.model.*;
 import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.enumerates.Visibility;
-import com.diploma.classdiagram.relationships.CardinalityRelationship;
-import com.diploma.classdiagram.relationships.Relationship;
-import com.diploma.classdiagram.relationships.RelationshipImpl;
-import com.diploma.global.Constants;
-import com.diploma.global.Element;
+import com.diploma.classdiagram.model.Class;
+import com.diploma.classdiagram.model.relationships.CardinalityRelationship;
+import com.diploma.classdiagram.model.relationships.Relationship;
+import com.diploma.classdiagram.model.relationships.RelationshipImpl;
+import com.diploma.classdiagram.Constants;
+import com.diploma.classdiagram.model.XMLElement;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -41,7 +39,7 @@ public class ClassParser implements Parser {
         return relationships;
     }
 
-    public List<Element> parse(String sourceFile) throws UMLParserException {
+    public List<XMLElement> parse(String sourceFile) throws UMLParserException {
 
         Document document = getDocument(sourceFile);
         if (null == document) {

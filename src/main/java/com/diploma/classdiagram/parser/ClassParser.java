@@ -40,7 +40,6 @@ public class ClassParser implements Parser {
     }
 
     public List<XMLElement> parse(String sourceFile) throws UMLParserException {
-
         Document document = getDocument(sourceFile);
         if (null == document) {
             throw new UMLParserException("Invalid source file path!");

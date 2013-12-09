@@ -1,6 +1,5 @@
 package com.diploma.classdiagram.model.relationships;
 
-import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.model.XMLElement;
 
 /**
@@ -65,7 +64,7 @@ public interface Relationship extends XMLElement {
      * witch is one of:
      *
      * @return - RelationshipImpl type.
-     * @see com.diploma.classdiagram.enumerates.RelationshipType
+     * @see RelationshipType
      */
     public RelationshipType getRelationshipType();
 

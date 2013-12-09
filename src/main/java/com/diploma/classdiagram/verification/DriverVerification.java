@@ -3,8 +3,8 @@ package com.diploma.classdiagram.verification;
 import com.diploma.classdiagram.model.Class;
 import com.diploma.classdiagram.model.Field;
 import com.diploma.classdiagram.model.Method;
-import com.diploma.classdiagram.enumerates.RelationshipType;
-import com.diploma.classdiagram.enumerates.Visibility;
+import com.diploma.classdiagram.model.relationships.RelationshipType;
+import com.diploma.classdiagram.model.Visibility;
 import com.diploma.classdiagram.model.relationships.Relationship;
 
 import java.util.*;

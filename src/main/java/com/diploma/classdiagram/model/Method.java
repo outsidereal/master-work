@@ -1,7 +1,5 @@
 package com.diploma.classdiagram.model;
 
-import com.diploma.classdiagram.enumerates.Visibility;
-
 import java.util.Iterator;
 import java.util.List;
 

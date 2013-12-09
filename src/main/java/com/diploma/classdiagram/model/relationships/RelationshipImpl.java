@@ -1,6 +1,5 @@
 package com.diploma.classdiagram.model.relationships;
 
-import com.diploma.classdiagram.enumerates.RelationshipType;
 import com.diploma.classdiagram.model.XMLElement;
 
 /**

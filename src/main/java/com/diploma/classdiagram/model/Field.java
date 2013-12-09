@@ -1,7 +1,5 @@
 package com.diploma.classdiagram.model;
 
-import com.diploma.classdiagram.enumerates.Visibility;
-
 /**
  * User: ZIM
  * Date: 18.08.12

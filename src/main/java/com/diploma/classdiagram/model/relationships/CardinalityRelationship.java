@@ -1,7 +1,5 @@
 package com.diploma.classdiagram.model.relationships;
 
-import com.diploma.classdiagram.enumerates.RelationshipType;
-
 /**
  * Created with IntelliJ IDEA.
  * User: ZIM

@@ -1,7 +1,7 @@
 package com.diploma.classdiagram.verification;
 
 import com.diploma.classdiagram.model.Class;
-import com.diploma.classdiagram.enumerates.RelationshipType;
+import com.diploma.classdiagram.model.relationships.RelationshipType;
 import com.diploma.classdiagram.model.relationships.Cardinality;
 import com.diploma.classdiagram.model.relationships.CardinalityRelationship;
 import com.diploma.classdiagram.model.relationships.Relationship;

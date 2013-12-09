@@ -8,7 +8,7 @@ import com.diploma.classdiagram.model.XMLElement;
  * Date: 25.08.12
  * Time: 17:42
  */
-public class RelationshipImpl implements XMLElement, Relationship {
+public class RelationshipImpl implements Relationship {
     private String id;
     private String name;
     private String source;

@@ -22,6 +22,7 @@ public class GraphVerification implements Verification {
 
     @Override
     public boolean verify() {
+        boolean isValid = true;
         Iterator iterator = relationships.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry) iterator.next();
@@ -30,12 +31,14 @@ public class GraphVerification implements Verification {
                 final CardinalityRelationship rel = (CardinalityRelationship) relationship;
                 final Double cardinality = calculateCardinality(rel);
                 if (cardinality < 1) {
-                    return false;
+                    isValid = false;
+                    LOGGER.error(GraphVerification.class.getName()
+                            + " Invalid multiplicity at association :" + relationship.getName());
                 }
             }
         }
 
-        return true;
+        return isValid;
     }
 
     private Double calculateCardinality(final CardinalityRelationship relationship) {

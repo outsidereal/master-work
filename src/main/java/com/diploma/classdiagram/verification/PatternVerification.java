@@ -47,17 +47,20 @@ public class PatternVerification implements Verification {
             List<Cardinality> associationsBetweenSameClasses = new ArrayList<Cardinality>();
             for (Cardinality second : associations) {
                 if (first != second) {
-                    if (((CardinalityRelationship) second).getSource().equals(((CardinalityRelationship) first).getSource())
-                            && ((CardinalityRelationship) second).getDestination().equals(((CardinalityRelationship) first).getDestination())) {
+                    if (((CardinalityRelationship) second).getSource()
+                            .equals(((CardinalityRelationship) first).getSource())
+                            && ((CardinalityRelationship) second).getDestination()
+                            .equals(((CardinalityRelationship) first).getDestination())) {
                         associationsBetweenSameClasses.add(second);
                     }
                 }
             }
-            if (associationsBetweenSameClasses.size() > 1 && !compareCardinalityAssociation(associationsBetweenSameClasses)) {
+            if (associationsBetweenSameClasses.size() > 1
+                    && !compareCardinalityAssociation(associationsBetweenSameClasses)) {
                 isValid = false;
             }
         }
-        return false;
+        return isValid;
     }
 
     private List<Cardinality> getAssociations() {

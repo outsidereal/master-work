@@ -36,10 +36,11 @@ public class GraphVerification implements Verification {
                 final Double cardinality = calculateCardinality(rel);
                 if (cardinality < 1) {
                     isValid = false;
-                    LOGGER.error(GraphVerification.class.getName()
-                            + " Invalid multiplicity at association between classes:"
-                            + classes.get(rel.getSource()).getName()+" and "
-                            + classes.get(rel.getDestination()).getName());
+                    LOGGER.error(GraphVerification.class.getSimpleName()
+                            + ". Invalid multiplicity at association between classes:"
+                            + classes.get(rel.getSource()).getName() + " and "
+                            + classes.get(rel.getDestination()).getName() +
+                            ".\nGraph weight = " + cardinality + ". Must be >= 1. \n\n");
                 }
             }
         }

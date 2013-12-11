@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="19" width="808" height="690"/>
     </constraints>
-    <properties/>
+    <properties>
+      <foreground color="-10053376"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="11c2f" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -13,7 +15,9 @@
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="6" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-3355393"/>
+        </properties>
         <border type="none"/>
         <children>
           <scrollpane id="74005">
@@ -30,6 +34,7 @@
               <component id="c35e1" class="javax.swing.JTextArea" binding="log">
                 <constraints/>
                 <properties>
+                  <background color="-13108"/>
                   <columns value="90"/>
                   <editable value="false"/>
                   <font name="Arial" size="14" style="0"/>

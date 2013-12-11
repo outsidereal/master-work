@@ -119,6 +119,9 @@ public class CardinalityRelationship implements Relationship, Cardinality {
         if (value.equals("*")) {
             srcMinCardinality = INFINITY;
             return;
+        } else if ("".equals(value)) {
+            srcMinCardinality = 0;
+            return;
         }
         srcMinCardinality = Integer.valueOf(value);
     }
@@ -127,13 +130,20 @@ public class CardinalityRelationship implements Relationship, Cardinality {
         if (value.equals("*")) {
             srcMaxCardinality = INFINITY;
             return;
+        } else if ("".equals(value)) {
+            srcMaxCardinality = 0;
+            return;
         }
+
         srcMaxCardinality = Integer.valueOf(value);
     }
 
     public void setDestinationMinimum(String value) {
         if (value.equals("*")) {
             dstMinCardinality = INFINITY;
+            return;
+        } else if ("".equals(value)) {
+            dstMinCardinality = 0;
             return;
         }
         dstMinCardinality = Integer.valueOf(value);
@@ -142,6 +152,9 @@ public class CardinalityRelationship implements Relationship, Cardinality {
     public void setDestinationMaximum(String value) {
         if (value.equals("*")) {
             dstMaxCardinality = INFINITY;
+            return;
+        } else if ("".equals(value)) {
+            dstMaxCardinality = 0;
             return;
         }
         dstMaxCardinality = Integer.valueOf(value);

@@ -70,20 +70,20 @@ public class DriverVerification implements Verification {
 
                 for (Method method : methods) {
                     if (!(Visibility.PUBLIC.equals(method.getVisibility()) || Visibility.PACKAGE.equals(method.getVisibility()))) {
-                        LOGGER.error(DriverVerification.class.getName() + " Invalid accessor of method " + method.getName() +
-                                " in interface " + clazz.getName() + " . It must be PUBLIC only!");
+                        LOGGER.error(DriverVerification.class.getSimpleName() + ". Invalid accessor of method " + method.getName() +
+                                " in interface " + clazz.getName() + ".\nIt must be PUBLIC only\n\n!");
                         isValid = false;
                     }
                 }
                 for (Field field : fields) {
                     if (!(Visibility.PUBLIC.equals(field.getVisibility()) || Visibility.PACKAGE.equals(field.getVisibility()))) {
-                        LOGGER.error(DriverVerification.class.getName() + " Invalid accessor of field " + field.getName() +
-                                " in interface " + clazz.getName() + " . It must be PUBLIC only!");
+                        LOGGER.error(DriverVerification.class.getSimpleName() + ". Invalid accessor of field " + field.getName() +
+                                " in interface " + clazz.getName() + ".\nIt must be PUBLIC only!\n\n");
                         isValid = false;
                     }
                     if (null == field.getValue()) {
-                        LOGGER.error(DriverVerification.class.getName() + "Error in field " + field.getName() +
-                                " of interface " + clazz.getName() + " .Fields in interfaces must has value.");
+                        LOGGER.error(DriverVerification.class.getSimpleName() + ". Error in field " + field.getName() +
+                                " of interface " + clazz.getName() + ".\nFields in interfaces must has value.\n\n");
                         isValid = false;
                     }
                 }
@@ -105,8 +105,9 @@ public class DriverVerification implements Verification {
             final List<Method> methods = clazz.getMethods();
             for (Method method : methods) {
                 if (method.isAbstract() && !clazz.isAbstract()) {
-                    LOGGER.error(DriverVerification.class.getName() + " Invalid modifier at method " + method.getName() +
-                            " in class " + clazz.getName() + " . If class has at least one abstract method - class must be marked as abstract!");
+                    LOGGER.error(DriverVerification.class.getSimpleName() + ". Invalid modifier at method "
+                            + method.getName() + " in class " + clazz.getName() +
+                            ".\nIf class has at least one abstract method - class must be marked as abstract!\n\n");
                     isValid = false;
                 }
             }
@@ -126,8 +127,8 @@ public class DriverVerification implements Verification {
             if (RelationshipType.GENERALIZATION.equals(relationship.getRelationshipType())) {
                 Class currentClass = classes.get(relationship.getDestination());
                 if (destinationClasses.contains(currentClass)) {
-                    LOGGER.error(DriverVerification.class.getName() + " Invalid inheritance at " + currentClass.getName() +
-                            " class. Each class can extends only one super-class!");
+                    LOGGER.error(DriverVerification.class.getSimpleName() + ". Invalid inheritance at " + currentClass.getName() +
+                            " class.\nEach class can extends only one super-class!\n\n");
                     isValid = false;
                 }
                 destinationClasses.add(currentClass);
@@ -154,14 +155,15 @@ public class DriverVerification implements Verification {
         }
 
         if (!source.isInterface()) {
-            LOGGER.error(DriverVerification.class.getName() + " : Implementation relationship is using only for interfaces!");
+            LOGGER.error(DriverVerification.class.getSimpleName() + ". Error at class " + source.getName() +
+                    ".\n Implementation relationship is using only for interfaces!\n\n");
             return false;
         }
 
         for (Method method : source.getMethods()) {
             if (!destination.getMethods().contains(method)) {
-                LOGGER.error(DriverVerification.class.getName() + "Class " + destination.getName() + " doesn't implement method " +
-                        method.getName() + " of interface " + source.getName());
+                LOGGER.error(DriverVerification.class.getSimpleName() + ". Class " + destination.getName()
+                        + " doesn't implement method " + method.getName() + " of interface " + source.getName() + "\n\n");
                 isValid = false;
             }
         }

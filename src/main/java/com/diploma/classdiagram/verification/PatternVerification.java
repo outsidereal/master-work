@@ -43,23 +43,26 @@ public class PatternVerification implements Verification {
     public boolean simpleMultipleCyclePattern() {
         boolean isValid = true;
         List<Cardinality> associations = getAssociations();
-        for (Cardinality first : associations) {
-            List<Cardinality> associationsBetweenSameClasses = new ArrayList<Cardinality>();
-            for (Cardinality second : associations) {
-                if (first != second) {
-                    if (((CardinalityRelationship) second).getSource()
-                            .equals(((CardinalityRelationship) first).getSource())
-                            && ((CardinalityRelationship) second).getDestination()
-                            .equals(((CardinalityRelationship) first).getDestination())) {
-                        associationsBetweenSameClasses.add(second);
-                    }
+        List<Cardinality> associationsBetweenSameClasses = new ArrayList<Cardinality>();
+        for (int i = 0; i < associations.size(); i++) {
+            CardinalityRelationship first = (CardinalityRelationship) associations.get(i);
+            associationsBetweenSameClasses.add(first);
+            for (int j = i + 1; j < associations.size(); j++) {
+                CardinalityRelationship second = (CardinalityRelationship) associations.get(j);
+                if ((first.getSource().equals(second.getSource()) || first.getSource().equals(second.getDestination()))
+                        && (first.getDestination().equals(second.getDestination()) || first.getDestination().equals(second.getSource()))
+                        && !first.getSource().equals(first.getDestination()) && !second.getSource().equals(second.getDestination())) {
+                    associationsBetweenSameClasses.add(second);
+
                 }
             }
-            if (associationsBetweenSameClasses.size() > 1
-                    && !compareCardinalityAssociation(associationsBetweenSameClasses)) {
+
+            if (associationsBetweenSameClasses.size() > 1 && !compareCardinalityAssociation(associationsBetweenSameClasses)) {
                 isValid = false;
             }
+            associationsBetweenSameClasses.clear();
         }
+
         return isValid;
     }
 
@@ -75,11 +78,16 @@ public class PatternVerification implements Verification {
 
     private boolean compareCardinalityAssociation(List<Cardinality> associations) {
         boolean isValid = true;
-        for (Cardinality first : associations) {
-            for (Cardinality second : associations) {
-                if (!first.equals(second) && !compare(first, second)) {
-                    LOGGER.error(PatternVerification.class.getName() + " Association mistake. " + ((CardinalityRelationship) first).getName() +
-                            " and " + ((CardinalityRelationship) second).getName() + " are incorrect!");
+        for (int i = 0; i < associations.size(); i++) {
+            Cardinality first = associations.get(i);
+            for (int j = i + 1; j < associations.size(); j++) {
+                Cardinality second = associations.get(j);
+                if (!compare(first, second)) {
+                    LOGGER.error(PatternVerification.class.getSimpleName() +
+                            ". Associations incompatibility between classes : " +
+                            classes.get(((Relationship) first).getSource()).getName() + " and " +
+                            classes.get(((Relationship) first).getDestination()).getName() + " .\n" +
+                            ((Relationship) first).getName() + " and " + ((Relationship) second).getName() + " are incorrect!\n\n");
                     isValid = false;
                 }
             }
@@ -88,21 +96,13 @@ public class PatternVerification implements Verification {
     }
 
     private boolean compare(Cardinality first, Cardinality second) {
-        if (first.getSourceMinimum() >= second.getSourceMinimum() && first.getSourceMaximum() >= second.getSourceMaximum()) {
-            //do nothing, everything is ok
-        } else if (first.getSourceMinimum() <= second.getSourceMinimum() && first.getSourceMaximum() <= second.getSourceMaximum()) {
-            //do nothing, everything is ok
-        } else {
+        if (first.getSourceMinimum() > second.getSourceMaximum()
+                || second.getSourceMinimum() > first.getSourceMaximum()
+                || first.getDestinationMinimum() > second.getDestinationMaximum()
+                || second.getDestinationMinimum() > first.getDestinationMaximum()) {
             return false;
         }
 
-        if (first.getDestinationMinimum() >= second.getDestinationMinimum() && first.getDestinationMaximum() >= second.getDestinationMaximum()) {
-            //do nothing, everything is ok
-        } else if (first.getDestinationMinimum() <= second.getDestinationMinimum() && first.getDestinationMaximum() <= second.getDestinationMaximum()) {
-            //do nothing, everything is ok
-        } else {
-            return false;
-        }
         return true;
     }
 }

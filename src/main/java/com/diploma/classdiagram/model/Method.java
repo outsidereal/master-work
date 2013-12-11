@@ -97,6 +97,7 @@ public class Method implements XMLElement {
 
         Method method = (Method) o;
 
+        if (!name.equals(method.getName())) return false;
         if (isFinal != method.isFinal) return false;
         if (isStatic != method.isStatic) return false;
         if (!parameters.equals(method.parameters)) return false;

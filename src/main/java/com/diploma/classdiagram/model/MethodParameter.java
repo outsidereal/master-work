@@ -62,6 +62,8 @@ public class MethodParameter implements XMLElement {
 
         MethodParameter that = (MethodParameter) o;
 
+        if (!id.equals(that.id)) return false;
+        if (!name.equals(that.name)) return false;
         if (!type.equals(that.type)) return false;
 
         return true;

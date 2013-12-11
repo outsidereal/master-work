@@ -87,7 +87,7 @@ public class ClassTester {
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     currentDiagram = fileChooser.getSelectedFile();
-                    log.append(currentDiagram.getAbsolutePath() + "\n");
+                    log.append("Selected diagram :"+currentDiagram.getAbsolutePath() + "\n\n");
                 }
             }
         });
@@ -127,7 +127,7 @@ public class ClassTester {
             } else if (patternsRadioButton.isSelected()) {
                 verification = new PatternVerification(parser.getParsedClasses(), parser.getParsedRelationships());
             } else if (graphRadioButton.isSelected()) {
-                verification = new GraphVerification(parser.getParsedRelationships());
+                verification = new GraphVerification(parser.getParsedClasses(), parser.getParsedRelationships());
             }
             if (null != verification) {
                 verification.verify();
@@ -138,7 +138,7 @@ public class ClassTester {
                 verification.verify();
                 verification = new PatternVerification(parser.getParsedClasses(), parser.getParsedRelationships());
                 verification.verify();
-                verification = new GraphVerification(parser.getParsedRelationships());
+                verification = new GraphVerification(parser.getParsedClasses(), parser.getParsedRelationships());
                 verification.verify();
             }
         }

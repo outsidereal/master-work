@@ -1,5 +1,7 @@
 package com.diploma.classdiagram.verification;
 
+import com.diploma.classdiagram.model.*;
+import com.diploma.classdiagram.model.Class;
 import com.diploma.classdiagram.model.relationships.RelationshipType;
 import com.diploma.classdiagram.model.relationships.CardinalityRelationship;
 import com.diploma.classdiagram.model.relationships.Relationship;
@@ -14,10 +16,12 @@ import java.util.Map;
  * Time: 15:10
  */
 public class GraphVerification implements Verification {
+    private final Map<String, Class> classes;
     private final Map<String, Relationship> relationships;
 
-    public GraphVerification(Map<String, Relationship> relationships) {
+    public GraphVerification(Map<String, Class> classes, Map<String, Relationship> relationships) {
         this.relationships = relationships;
+        this.classes = classes;
     }
 
     @Override
@@ -33,7 +37,9 @@ public class GraphVerification implements Verification {
                 if (cardinality < 1) {
                     isValid = false;
                     LOGGER.error(GraphVerification.class.getName()
-                            + " Invalid multiplicity at association :" + relationship.getName());
+                            + " Invalid multiplicity at association between classes:"
+                            + classes.get(rel.getSource()).getName()+" and "
+                            + classes.get(rel.getDestination()).getName());
                 }
             }
         }

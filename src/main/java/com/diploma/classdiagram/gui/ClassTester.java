@@ -100,7 +100,7 @@ public class ClassTester {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("ClassTester");
+        JFrame frame = new JFrame("UML Tester");
         frame.setContentPane(new ClassTester().panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

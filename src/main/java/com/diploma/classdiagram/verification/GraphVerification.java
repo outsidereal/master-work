@@ -45,7 +45,7 @@ public class GraphVerification implements Verification {
             }
         }
         if (isValid){
-            LOGGER.info("Graph Verification: The diagram is correct!");
+            LOGGER.info("Graph Verification: The diagram is correct!\n");
         }
 
         return isValid;

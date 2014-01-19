@@ -32,7 +32,7 @@ public class DriverVerification implements Verification {
         isValid &= checkAbstractClassRules();
         isValid &= checkForAbsenceOfMultipleGeneralization();
         if (isValid){
-            LOGGER.info("Driver Verification: The diagram is correct!");
+            LOGGER.info("Driver Verification: The diagram is correct!\n");
         }
         return isValid;
     }

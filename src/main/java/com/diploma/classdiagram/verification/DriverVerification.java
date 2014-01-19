@@ -31,6 +31,9 @@ public class DriverVerification implements Verification {
         isValid &= checkInterfaceDefinitionRules();
         isValid &= checkAbstractClassRules();
         isValid &= checkForAbsenceOfMultipleGeneralization();
+        if (isValid){
+            LOGGER.info("Driver Verification: The diagram is correct!");
+        }
         return isValid;
     }
 

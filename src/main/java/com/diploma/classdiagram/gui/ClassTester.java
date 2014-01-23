@@ -14,7 +14,7 @@ import java.io.File;
  * Date: 11/16/13
  */
 public class ClassTester {
-    private JPanel panel1;
+    private JPanel classTesterPanel;
     private JRadioButton graphRadioButton;
     private JRadioButton testDriverRadioButton;
     private JRadioButton setRadioButton;
@@ -25,6 +25,10 @@ public class ClassTester {
     private JTextArea log;
     private File currentDiagram;
     final JFileChooser fileChooser = new JFileChooser();
+
+    public JPanel getClassTesterPanel() {
+        return classTesterPanel;
+    }
 
     public ClassTester() {
         testDriverRadioButton.setSelected(true);
@@ -101,7 +105,7 @@ public class ClassTester {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("UML Tester");
-        frame.setContentPane(new ClassTester().panel1);
+        frame.setContentPane(new ClassTester().classTesterPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
